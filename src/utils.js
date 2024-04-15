@@ -32,8 +32,23 @@ export function createUI(scene) {
     "small",
     "Invite friends",
     "#5864F2",
-    openDiscordInviteDialog
+    inviteFriends
   );
+}
+
+export function inviteFriends() {
+  const discordMode = new URLSearchParams(window.location.search).get("instance_id") !== null;
+  if (discordMode) {
+    openDiscordInviteDialog();
+  } else {
+    const shareContent = { url: location.href, title: "Join my room" };
+    const clipboardFallback = () => {
+      navigator.clipboard.writeText(shareContent.url)
+        .then(() => alert("Link copied to clipboard"))
+        .catch(() => prompt("Copy the link below", shareContent.url));
+    };
+    navigator.share ? navigator.share(shareContent).catch(clipboardFallback) : clipboardFallback();
+  }
 }
 
 export function updatePlayers(scene) {

@@ -5,7 +5,7 @@ import DialogueScene from "./dialogueScene";
 import WinScene from "./winScene";
 import SummonScene from "./summonScene";
 import FiredScene from "./firedScene";
-import { getState, insertCoin, isHost, setState } from "playroomkit";
+import { getState, insertCoin, setState } from "playroomkit";
 import RexCircleMaskImagePlugin from "phaser3-rex-plugins/plugins/circlemaskimage-plugin.js";
 
 const config = {
@@ -27,11 +27,13 @@ const config = {
   }
 };
 
+const discordMode = new URLSearchParams(window.location.search).get("instance_id") !== null;
 insertCoin({
   gameId: "9vfqsOPKlWF0i0bBfdsd",
-  discord: {
+  discord: discordMode ? {
     scope: ["identify", "guilds.members.read", "rpc.voice.read"]
-  }
+  } : false,
+  matchmaking: !discordMode
 }).then(() => {
   const game = new Phaser.Game(config);
   const sceneState = getState("currentScene");

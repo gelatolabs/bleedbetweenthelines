@@ -1,6 +1,6 @@
 import Phaser from "phaser";
-import { openDiscordInviteDialog, setState } from "playroomkit";
-import { createPlayers, updatePlayers, updateScene } from "./utils";
+import { setState } from "playroomkit";
+import { createPlayers, inviteFriends, updatePlayers, updateScene } from "./utils";
 import Button from "./button";
 
 export default class MenuScene extends Phaser.Scene {
@@ -37,7 +37,7 @@ export default class MenuScene extends Phaser.Scene {
       "small",
       "Invite friends",
       "#5864F2",
-      openDiscordInviteDialog
+      inviteFriends
     );
   }
 
