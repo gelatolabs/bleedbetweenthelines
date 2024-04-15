@@ -80,6 +80,12 @@ export default class BookScene extends Phaser.Scene {
     const level = getState("level");
     this.problems = problemLayouts[level - 1].map(problem => new Problem(this, problem.x, problem.y, problem.imageKey));
 
+    this.solvedProblems = getState("solvedProblems");
+    if (!this.solvedProblems) {
+      this.solvedProblems = [];
+      setState("solvedProblems", []);
+    }
+
     this.tools = [
       new Tool(this, 1800, 370, "bandage"),
       new Tool(this, 110, 490, "glue"),
@@ -105,6 +111,7 @@ export default class BookScene extends Phaser.Scene {
 
   solveProblem(problem) {
     this.problems = this.problems.filter(p => p !== problem);
+    this.solvedProblems = [...this.solvedProblems, problem.imageKey];
     if (this.problems.length === 0) {
       const level = getState("level");
       if (level === 6) {
@@ -113,12 +120,24 @@ export default class BookScene extends Phaser.Scene {
         setState("level", level + 1);
         setState("currentScene", "DialogueScene");
       }
+    } else {
+      setState("solvedProblems", this.solvedProblems);
     }
   }
 
   update() {
     updateScene(this);
     updatePlayers(this);
+
+    const solvedProblems = getState("solvedProblems");
+    if (solvedProblems !== this.solvedProblems) {
+      this.solvedProblems = solvedProblems;
+      this.problems.forEach(problem => {
+        if (this.solvedProblems.includes(problem.imageKey)) {
+          problem.solve();
+        }
+      });
+    }
 
     const now = Date.now();
     const elapsed = (now - getState("timerStartTime")) / 1000;
