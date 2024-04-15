@@ -45,4 +45,9 @@ export default class Button {
     color.darken(20);
     return Phaser.Display.Color.RGBToString(color.red, color.green, color.blue);
   }
+
+  destroy() {
+    this.text.destroy();
+    this.graphics.destroy();
+  }
 }

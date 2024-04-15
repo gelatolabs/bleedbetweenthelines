@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { setState } from "playroomkit";
-import { createPlayers, updatePlayers, updateScene } from "./utils";
+import { createPlayers, resetGame, updatePlayers, updateScene } from "./utils";
 import Button from "./button";
 
 export default class SummonScene extends Phaser.Scene {
@@ -26,10 +26,7 @@ export default class SummonScene extends Phaser.Scene {
       "large",
       "Play again",
       "#22A559",
-      () => {
-        setState("level", 0);
-        setState("currentScene", "MenuScene");
-      }
+      resetGame
     );
   }
 

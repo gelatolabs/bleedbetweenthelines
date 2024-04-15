@@ -71,6 +71,8 @@ export default class DialogueScene extends Phaser.Scene {
     this.input.on("pointerdown", () => {
       this.advanceDialogue();
     });
+
+    setState("timerStartTime", null);
   }
 
   advanceDialogue() {

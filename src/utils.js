@@ -1,6 +1,6 @@
 import Player from "./player";
 import Button from "./button";
-import { getState, onPlayerJoin, myPlayer, openDiscordInviteDialog } from "playroomkit";
+import { getState, onPlayerJoin, myPlayer, openDiscordInviteDialog, setState, resetStates } from "playroomkit";
 
 export function createPlayers(scene) {
   scene.players = [];
@@ -65,4 +65,14 @@ export function updateScene(scene) {
   if (sceneState && sceneState !== scene.scene.key) {
     scene.scene.start(sceneState);
   }
+}
+
+export function resetGame() {
+  setState("bookOpened", null);
+  setState("fineCharged", null);
+  setState("solvedProblems", null);
+  setState("timerStartTime", null)
+  setState("currentDialogue", null);
+  setState("level", 0);
+  setState("currentScene", "MenuScene");
 }
