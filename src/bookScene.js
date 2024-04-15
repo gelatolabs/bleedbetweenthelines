@@ -95,6 +95,7 @@ export default class BookScene extends Phaser.Scene {
       new Tool(this, 1670, 510, "tape"),
       new Tool(this, 190, 640, "wand")
     ]
+    this.currentTool = null;
 
     const timeLimit = 30;
 

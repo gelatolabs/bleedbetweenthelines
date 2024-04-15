@@ -26,6 +26,10 @@ export default class Tool {
       }
     });
 
+    this.scene.events.on("start", () => {
+      this.pickedUp = false;
+    });
+
     this.scene.events.on("update", () => {
       const pos = getState(this.stateKey);
       if (this.pickedUp) {
