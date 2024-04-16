@@ -9,11 +9,14 @@ export default class WinScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("bg-win", "assets/bg-win.png");
-    this.load.image("pointer", "assets/pointer.png");
+    this.load.image("bg-win", "img/bg-win.png");
+    this.load.image("pointer", "img/pointer.png");
+    this.load.audio("win", "audio/win.mp3");
   }
 
   create() {
+    this.sound.play("win");
+
     this.add.image(0, 0, "bg-win").setOrigin(0);
 
     createPlayers(this);

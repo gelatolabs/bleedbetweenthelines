@@ -1,6 +1,6 @@
 import Player from "./player";
 import Button from "./button";
-import { getState, onPlayerJoin, myPlayer, openDiscordInviteDialog, setState, resetStates } from "playroomkit";
+import { getState, onPlayerJoin, myPlayer, openDiscordInviteDialog, setState } from "playroomkit";
 
 export function createPlayers(scene) {
   scene.players = [];

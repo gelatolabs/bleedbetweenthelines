@@ -8,11 +8,14 @@ export default class FiredScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("bg-fired", "assets/bg-fired.png");
-    this.load.image("pointer", "assets/pointer.png");
+    this.load.image("bg-fired", "img/bg-fired.png");
+    this.load.image("pointer", "img/pointer.png");
+    this.load.audio("lose", "audio/win.mp3");
   }
 
   create() {
+    this.sound.play("lose");
+
     this.add.image(0, 0, "bg-fired").setOrigin(0);
 
     createPlayers(this);
